@@ -78,7 +78,7 @@ function getAverage(value1, value2) {
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
     //throw new Error('Not implemented');
-    return Math.sqrt((x2 - x1)**2 + (y2 - y1)**2);
+    return Math.sqrt(Math.pow((x2 - x1), 2)  + Math.pow((y2 - y1), 2));
 }
 
 /**
@@ -171,7 +171,9 @@ function parseNumberFromString(value) {
  */
 function getParallelipidedDiagonal(a,b,c) {
     //throw new Error('Not implemented');
-    return ((a >= 0 && b >= 0 && c >= 0) ? Math.sqrt(a**2 + b**2 + c**2) : NaN);
+    return ((a >= 0 && b >= 0 && c >= 0) 
+    ? Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2)) 
+    : NaN);
 }
 
 /**
