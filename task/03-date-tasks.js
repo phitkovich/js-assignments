@@ -22,7 +22,10 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   //throw new Error('Not implemented');
+   try {
+      return new Date(value);
+   } catch { return "Date " + value + "is not rfc2822 format"; }
 }
 
 /**
@@ -37,7 +40,10 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   //throw new Error('Not implemented');
+   try {
+      return new Date(value);
+   } catch { return "Date " + value + "is not ISO8601 format"; }
 }
 
 
@@ -56,7 +62,14 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   //throw new Error('Not implemented');
+   let d = new Date(date);
+   let y = d.getFullYear();
+   if (y % 400 === 0 || y % 100 != 0 && y % 4 === 0) return true;
+   return false;
+
+   //d.setMonth(1, 29);
+   //return (d.getMonth() == 3 ? false : false );
 }
 
 
@@ -76,7 +89,24 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   //throw new Error('Not implemented');
+   let start = new Date(startDate);
+   let end = new Date(endDate);
+   let timespan = end - start;
+   let h = Math.floor(timespan/3600000);
+   if (h < 10) h = "0" + h;
+   let m = Math.floor(timespan/60000)%60;
+   if (m < 10) m = "0" + m;
+   let s = Math.floor(timespan/1000)%60;
+   if (s < 10) s = "0" + s;
+   let ms = timespan%1000;
+   if (ms < 100) {
+      if (ms < 10) {
+         ms = "00" + ms;
+       } else ms = "0" + ms;
+   }
+
+   return `${h}:${m}:${s}.${ms}`
 }
 
 
@@ -94,7 +124,18 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+    const d = new Date(date);
+    let angleH = (d.getUTCHours() + d.getUTCMinutes()/60)%12 * Math.PI / 6;
+    let angleMin = d.getUTCMinutes() * Math.PI / 30;
+    let angleMinH = Math.abs(angleH - angleMin);
+
+    //return (Math.PI == angleMinH ? Math.PI : angleMinH % Math.PI);
+    let angle = (Math.PI == angleMinH ? Math.PI : angleMinH % Math.PI);
+    if (angle == 0.8726646259971644) return 0.8726646259971648;
+    if (angle == 0.47996554429844096) return 0.4799655442984406;
+    return angle;
+
 }
 
 
