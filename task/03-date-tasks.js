@@ -23,9 +23,9 @@
  */
 function parseDataFromRfc2822(value) {
    //throw new Error('Not implemented');
-   try {
+   //try {
       return new Date(value);
-   } catch { return "Date " + value + "is not rfc2822 format"; }
+   //} catch { return "Date " + value + "is not rfc2822 format"; }
 }
 
 /**
@@ -41,9 +41,9 @@ function parseDataFromRfc2822(value) {
  */
 function parseDataFromIso8601(value) {
    //throw new Error('Not implemented');
-   try {
+   //try {
       return new Date(value);
-   } catch { return "Date " + value + "is not ISO8601 format"; }
+   //} catch { return "Date " + value + "is not ISO8601 format"; }
 }
 
 
